@@ -66,7 +66,7 @@ function login(){
     const username = document.getElementById("user").value;
     const password = document.getElementById("pass").value;
 
-    if(username === "admin" && password === "1234"){
+    if(username === "admin" && password === "RTAKIM10836927"){
 
         alert("เข้าสู่ระบบสำเร็จ");
 
