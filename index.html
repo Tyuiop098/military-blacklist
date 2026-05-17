@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Military Blacklist</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#111;
+    color:white;
+}
+
+header{
+    background:linear-gradient(90deg,#8b0000,#ff0000);
+    padding:20px;
+    text-align:center;
+    font-size:30px;
+    font-weight:bold;
+    color:gold;
+    box-shadow:0 0 20px red;
+}
+
+.container{
+    padding:20px;
+}
+
+.search-box{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+input{
+    width:80%;
+    max-width:400px;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+}
+
+button{
+    padding:15px 20px;
+    border:none;
+    border-radius:10px;
+    background:red;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    margin-left:10px;
+}
+
+button:hover{
+    background:darkred;
+}
+
+.card{
+    background:#1e1e1e;
+    border:2px solid gold;
+    border-radius:15px;
+    padding:20px;
+    margin-top:20px;
+    box-shadow:0 0 15px rgba(255,0,0,0.5);
+}
+
+.status{
+    color:red;
+    font-weight:bold;
+    font-size:22px;
+}
+
+footer{
+    margin-top:50px;
+    text-align:center;
+    padding:20px;
+    background:#000;
+    color:gray;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+MILITARY BLACKLIST
+</header>
+
+<div class="container">
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="ค้นหาชื่อ Roblox">
+<button onclick="searchUser()">ค้นหา</button>
+</div>
+
+<div id="result"></div>
+
+</div>
+
+<footer>
+Military Roleplay System 2026
+</footer>
+
+<script>
+
+const blacklist = [
+{
+    username:"Player123",
+    reason:"ใช้โปรแกรมโกง",
+    duration:"ถาวร",
+    staff:"ADMIN_A"
+},
+{
+    username:"ToxicBoy",
+    reason:"ป่วนเซิร์ฟเวอร์",
+    duration:"7 วัน",
+    staff:"MOD_B"
+}
+];
+
+function searchUser(){
+
+    const input = document.getElementById("searchInput").value.toLowerCase();
+
+    const result = document.getElementById("result");
+
+    const user = blacklist.find(u => u.username.toLowerCase() === input);
+
+    if(user){
+
+        result.innerHTML = `
+        <div class="card">
+            <h2>${user.username}</h2>
+            <p class="status">BLACKLIST</p>
+            <p><b>เหตุผล:</b> ${user.reason}</p>
+            <p><b>ระยะเวลา:</b> ${user.duration}</p>
+            <p><b>Staff:</b> ${user.staff}</p>
+        </div>
+        `;
+
+    }else{
+
+        result.innerHTML = `
+        <div class="card">
+            <h2>ไม่พบข้อมูล</h2>
+            <p style="color:lightgreen;">CLEAR ✅</p>
+        </div>
+        `;
+    }
+}
+
+</script>
+
+</body>
+</html>
