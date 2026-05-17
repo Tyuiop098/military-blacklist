@@ -95,7 +95,7 @@ header{
     margin-left:10px;
 }
 
-/* CARD */
+/* RESULT */
 
 #result{
     margin-top:40px;
@@ -106,6 +106,7 @@ header{
 .card{
     background:white;
     width:350px;
+    max-width:90%;
     padding:25px;
     border-radius:20px;
     border-top:5px solid red;
@@ -156,6 +157,7 @@ header{
 .modal-content{
     background:white;
     width:350px;
+    max-width:90%;
     padding:30px;
     border-radius:20px;
     text-align:center;
@@ -257,6 +259,7 @@ header{
 }
 
 </style>
+
 </head>
 <body>
 
@@ -340,6 +343,8 @@ LOGIN
 
 const blacklist = [];
 
+/* SEARCH */
+
 function searchUser(){
 
     const input =
@@ -351,4 +356,179 @@ function searchUser(){
 
     const user =
     blacklist.find(
-        u => u.username.to
+        u => u.username.toLowerCase() === input
+    );
+
+    if(user){
+
+        result.innerHTML = `
+        <div class="card">
+
+        <h2>${user.username}</h2>
+
+        <h3 style="color:red;">
+        BLACKLIST
+        </h3>
+
+        <br>
+
+        <p><b>เหตุผล:</b> ${user.reason}</p>
+
+        <p><b>ระยะเวลา:</b> ${user.duration}</p>
+
+        </div>
+        `;
+
+    }else{
+
+        result.innerHTML = `
+        <div class="card">
+
+        <h2>ไม่พบข้อมูล</h2>
+
+        <h3 style="color:green;">
+        CLEAR ✅
+        </h3>
+
+        </div>
+        `;
+    }
+}
+
+/* LOGIN */
+
+function openLogin(){
+
+    document.getElementById("loginModal")
+    .style.display = "flex";
+
+}
+
+function closeLogin(){
+
+    document.getElementById("loginModal")
+    .style.display = "none";
+
+}
+
+function login(){
+
+    const username =
+    document.getElementById("user").value;
+
+    const password =
+    document.getElementById("pass").value;
+
+    const accounts = [
+
+        {
+            user:"adminCAT",
+            pass:"admincat0276speed"
+        },
+
+        {
+            user:"adminKIM",
+            pass:"adminkim1091"
+        },
+
+        {
+            user:"adminYOK",
+            pass:"adminyok09266ei"
+        }
+
+    ];
+
+    const valid =
+    accounts.find(
+        acc =>
+        acc.user === username &&
+        acc.pass === password
+    );
+
+    if(valid){
+
+        alert("เข้าสู่ระบบสำเร็จ");
+
+        closeLogin();
+
+        document.getElementById("dashboard")
+        .style.display = "block";
+
+    }else{
+
+        alert("ชื่อผู้ใช้หรือรหัสผ่านผิด");
+
+    }
+
+}
+
+/* ADD BLACKLIST */
+
+function addBlacklist(){
+
+    const username =
+    document.getElementById("newUser").value;
+
+    const reason =
+    document.getElementById("newReason").value;
+
+    const duration =
+    document.getElementById("newDuration").value;
+
+    if(username === "" ||
+       reason === "" ||
+       duration === ""){
+
+        alert("กรอกข้อมูลให้ครบ");
+        return;
+    }
+
+    blacklist.push({
+
+        username,
+        reason,
+        duration
+
+    });
+
+    updateList();
+
+    alert("เพิ่ม Blacklist สำเร็จ");
+
+}
+
+/* UPDATE LIST */
+
+function updateList(){
+
+    const list =
+    document.getElementById("blacklistList");
+
+    list.innerHTML = "";
+
+    blacklist.forEach(user => {
+
+        list.innerHTML += `
+        <div>
+
+        <b>${user.username}</b>
+
+        <br><br>
+
+        เหตุผล: ${user.reason}
+
+        <br>
+
+        ระยะเวลา: ${user.duration}
+
+        </div>
+        `;
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
