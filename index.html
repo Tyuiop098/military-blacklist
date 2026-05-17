@@ -7,16 +7,266 @@
 
 <title>Military Blacklist</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+/* HEADER */
+
+header{
+    background:white;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:4px solid red;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#c40000;
+}
+
+.login-open{
+    background:linear-gradient(90deg,#c40000,gold);
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.login-open:hover{
+    transform:scale(1.05);
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.hero h1{
+    color:#c40000;
+    font-size:40px;
+}
+
+.hero p{
+    color:#666;
+    margin-top:10px;
+}
+
+/* SEARCH */
+
+.search-box{
+    margin-top:40px;
+}
+
+.search-box input{
+    width:300px;
+    max-width:90%;
+    padding:15px;
+    border:2px solid gold;
+    border-radius:12px;
+    font-size:16px;
+}
+
+.search-box button{
+    padding:15px 20px;
+    background:gold;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-left:10px;
+}
+
+/* CARD */
+
+#result{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+}
+
+.card{
+    background:white;
+    width:350px;
+    padding:25px;
+    border-radius:20px;
+    border-top:5px solid red;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+
+    animation:show 0.4s;
+}
+
+@keyframes show{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* LOGIN */
+
+.modal{
+    display:none;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.5);
+
+    justify-content:center;
+    align-items:center;
+
+    animation:fade 0.3s;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+.modal-content{
+    background:white;
+    width:350px;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+
+    animation:popup 0.3s;
+}
+
+@keyframes popup{
+    from{
+        transform:scale(0.8);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.modal-content h2{
+    color:#c40000;
+    margin-bottom:20px;
+}
+
+.modal-content input{
+    width:100%;
+    padding:15px;
+    margin-bottom:15px;
+    border:2px solid gold;
+    border-radius:12px;
+}
+
+.modal-content button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:red;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.close{
+    margin-top:15px;
+    color:gray;
+    cursor:pointer;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    display:none;
+    margin:40px auto;
+    width:90%;
+    max-width:500px;
+
+    background:white;
+    padding:25px;
+    border-radius:20px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.dashboard h2{
+    color:#c40000;
+    margin-bottom:20px;
+}
+
+.dashboard input{
+    width:100%;
+    padding:15px;
+    margin-bottom:15px;
+    border:2px solid gold;
+    border-radius:12px;
+}
+
+.dashboard button{
+    width:100%;
+    padding:15px;
+    background:red;
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.list{
+    margin-top:30px;
+}
+
+.list div{
+    background:#fafafa;
+    padding:15px;
+    border-left:5px solid red;
+    margin-bottom:10px;
+    border-radius:10px;
+}
+
+</style>
 </head>
 <body>
 
 <header>
 
-<h1>MILITARY BLACKLIST</h1>
+<div class="logo">
+MILITARY BLACKLIST
+</div>
 
-<button onclick="openLogin()">
+<button class="login-open" onclick="openLogin()">
 เข้าสู่ระบบเจ้าหน้าที่
 </button>
 
@@ -24,7 +274,9 @@
 
 <section class="hero">
 
-<h2>ระบบตรวจสอบ Blacklist</h2>
+<h1>ระบบตรวจสอบ Blacklist</h1>
+
+<p>Military Roleplay System</p>
 
 <div class="search-box">
 
@@ -56,15 +308,47 @@
 LOGIN
 </button>
 
-<p onclick="closeLogin()" class="close">
+<div class="close" onclick="closeLogin()">
 ปิด
-</p>
-
 </div>
 
 </div>
 
-<script src="script.js"></script>
+</div>
 
-</body>
-</html>
+<!-- DASHBOARD -->
+
+<div class="dashboard" id="dashboard">
+
+<h2>STAFF DASHBOARD</h2>
+
+<input type="text" id="newUser" placeholder="ชื่อ Roblox">
+
+<input type="text" id="newReason" placeholder="เหตุผล">
+
+<input type="text" id="newDuration" placeholder="ระยะเวลา">
+
+<button onclick="addBlacklist()">
+เพิ่ม Blacklist
+</button>
+
+<div class="list" id="blacklistList"></div>
+
+</div>
+
+<script>
+
+const blacklist = [];
+
+function searchUser(){
+
+    const input =
+    document.getElementById("searchInput")
+    .value.toLowerCase();
+
+    const result =
+    document.getElementById("result");
+
+    const user =
+    blacklist.find(
+        u => u.username.to
